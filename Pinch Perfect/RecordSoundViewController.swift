@@ -73,6 +73,18 @@ class RecordSoundViewController: UIViewController, AVAudioRecorderDelegate {
             // Perform the segue
             self.performSegueWithIdentifier("stopRecording", sender: recordedAudio)
         }
+        else {
+            recordButton.enabled = true
+            stopButton.hidden = true
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "stopRecording") {
+            let playSoundsVC: PlaySoundsViewController = segue.destinationViewController as! PlaySoundsViewController
+            let data = sender as! RecordAudio
+            playSoundsVC.receivedAudio = data
+        }
     }
 }
 
