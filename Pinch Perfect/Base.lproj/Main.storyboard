@@ -2,13 +2,14 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="38Q-5s-3Zr">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Record-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="Pinch_Perfect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="RecordSoundViewController" customModule="Pinch_Perfect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -39,7 +40,6 @@
                                 </state>
                                 <connections>
                                     <action selector="tapOnStopBtn:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="e1H-Ct-0OG"/>
-                                    <segue destination="5Zf-zk-p3j" kind="show" id="WjI-81-J2R"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -59,12 +59,12 @@
                                 <exclude reference="OKs-M8-tyb"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="2Jq-ub-TqV"/>
-                                <exclude reference="jeR-mD-4kM"/>
+                                <exclude reference="1t8-Bm-Qpa"/>
                                 <exclude reference="304-8i-qMb"/>
                                 <exclude reference="ex6-KH-zzF"/>
+                                <exclude reference="2Jq-ub-TqV"/>
+                                <exclude reference="jeR-mD-4kM"/>
                                 <exclude reference="PjU-XW-UOU"/>
-                                <exclude reference="1t8-Bm-Qpa"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -74,12 +74,12 @@
                                 <include reference="OKs-M8-tyb"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="2Jq-ub-TqV"/>
-                                <include reference="jeR-mD-4kM"/>
+                                <include reference="1t8-Bm-Qpa"/>
                                 <include reference="304-8i-qMb"/>
                                 <include reference="ex6-KH-zzF"/>
+                                <include reference="2Jq-ub-TqV"/>
+                                <include reference="jeR-mD-4kM"/>
                                 <include reference="PjU-XW-UOU"/>
-                                <include reference="1t8-Bm-Qpa"/>
                             </mask>
                         </variation>
                     </view>
@@ -88,11 +88,12 @@
                         <outlet property="recordButton" destination="IZP-PW-A4f" id="x7L-Wv-8Oa"/>
                         <outlet property="recordingInProgress" destination="5ab-pn-Wcz" id="y6d-pn-IZr"/>
                         <outlet property="stopButton" destination="OKs-M8-tyb" id="kyX-Yd-UjX"/>
+                        <segue destination="5Zf-zk-p3j" kind="show" identifier="stopRecording" id="qwg-cK-rI1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1126.5" y="253"/>
+            <point key="canvasLocation" x="1156.5" y="246"/>
         </scene>
         <!--Play Sounds View Controller-->
         <scene sceneID="bWH-dg-KIn">
@@ -103,6 +104,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Fx1-i3-dNU"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="RD0-mI-3NP">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CZB-pp-Ps2">
@@ -199,12 +201,12 @@
                                 <exclude reference="1X1-oQ-heF"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="gUy-US-3DX"/>
+                                <exclude reference="pfF-eV-tQd"/>
                                 <exclude reference="JW5-xG-dlP"/>
                                 <exclude reference="ZZb-uv-hDZ"/>
                                 <exclude reference="OGT-6f-lum"/>
                                 <exclude reference="hg9-Yo-68y"/>
-                                <exclude reference="gUy-US-3DX"/>
-                                <exclude reference="pfF-eV-tQd"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -214,12 +216,12 @@
                                 <include reference="1X1-oQ-heF"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="gUy-US-3DX"/>
+                                <include reference="pfF-eV-tQd"/>
                                 <include reference="JW5-xG-dlP"/>
                                 <include reference="ZZb-uv-hDZ"/>
                                 <include reference="OGT-6f-lum"/>
                                 <include reference="hg9-Yo-68y"/>
-                                <include reference="gUy-US-3DX"/>
-                                <include reference="pfF-eV-tQd"/>
                             </mask>
                         </variation>
                     </view>

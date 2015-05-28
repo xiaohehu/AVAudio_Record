@@ -12,7 +12,6 @@ import AVFoundation
 class PlaySoundsViewController: UIViewController {
 
     var audioPlayer : AVAudioPlayer!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         if var filePath = NSBundle.mainBundle().pathForResource("movie_quote", ofType: "mp3") {
@@ -32,10 +31,10 @@ class PlaySoundsViewController: UIViewController {
     }
     
     @IBAction func playSlowAudio(sender: AnyObject) {
-        playSlowAudio(0.5)
+        playTheAudio(0.5)
     }
     @IBAction func playFastAudio(sender: AnyObject) {
-        playSlowAudio(1.5)
+        playTheAudio(1.5)
     }
     func playTheAudio(speed : Float) {
         audioPlayer.stop()
