@@ -59,6 +59,7 @@ class RecordSoundViewController: UIViewController, AVAudioRecorderDelegate {
 
     @IBAction func tapOnStopBtn(sender: AnyObject) {
         recordingInProgress.hidden = true
+        audioRecorder.stop()           
         var audioSession = AVAudioSession.sharedInstance()
         audioSession.setActive(false, error: nil)
     }

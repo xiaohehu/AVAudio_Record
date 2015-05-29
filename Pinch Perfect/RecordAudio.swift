@@ -9,6 +9,7 @@
 import Foundation
 
 class RecordAudio: NSObject {
+    
     var filePathUrl: NSURL!
     var title: NSString!
 }
