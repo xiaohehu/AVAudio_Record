@@ -16,6 +16,8 @@ class PlaySoundsViewController: UIViewController {
     var receivedAudio : RecordAudio!
     var audioEngine : AVAudioEngine!
     var audioFile : AVAudioFile!
+    var reverbPlayers : [AVAudioPlayer] = []
+    let playerNum : Int = 10
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +36,15 @@ class PlaySoundsViewController: UIViewController {
         
         audioEngine = AVAudioEngine()
         audioFile = AVAudioFile(forReading: receivedAudio.filePathUrl, error: nil)
+        
+        /**
+        create reverb audio player array
+        */
+        for i in 0...playerNum {
+            var tmpPlayer : AVAudioPlayer!
+            tmpPlayer = AVAudioPlayer (contentsOfURL: receivedAudio.filePathUrl, error: nil)
+            reverbPlayers.append(tmpPlayer)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -87,17 +98,34 @@ class PlaySoundsViewController: UIViewController {
         audioPlayer.currentTime = 0
         audioPlayer.play()
         
-        let delay : NSTimeInterval = 0.25
+        let echoDelay : NSTimeInterval = 0.25
         var playTime : NSTimeInterval!
-        playTime = audioPlayer2.deviceCurrentTime + delay
+        playTime = audioPlayer2.deviceCurrentTime + echoDelay
         audioPlayer2.currentTime = 0
         audioPlayer2.volume = 0.7
         audioPlayer2.playAtTime(playTime)
     }
     
+    @IBAction func playAudioWithReverb(sender: AnyObject) {
+        audioPlayer.stop()
+        audioPlayer2.stop()
+        
+        let reverbDelay : NSTimeInterval = 0.02
+        for i in 0...playerNum {
+            var curDelay = reverbDelay * NSTimeInterval(i)
+            var tmpAudioPlayer : AVAudioPlayer = reverbPlayers[i]
+            //M_E is e=2.718...
+            //dividing N by 2 made it sound ok for the case N=10
+            var exponent:Double = -Double(i)/Double(playerNum/2)
+            var volume = Float(pow(Double(M_E), exponent))
+            tmpAudioPlayer.volume = volume
+            tmpAudioPlayer.playAtTime(tmpAudioPlayer.deviceCurrentTime + curDelay)
+        }
+    }
     
     @IBAction func stopAudio(sender: AnyObject) {
         audioPlayer.stop()
+        audioPlayer2.stop()
     }
     /*
     // MARK: - Navigation
