@@ -12,6 +12,8 @@ class RecordSoundViewController: UIViewController, AVAudioRecorderDelegate {
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var recordingInProgress: UILabel!
     @IBOutlet weak var stopButton: UIButton!
+    @IBOutlet weak var resumeButton: UIButton!
+    @IBOutlet weak var pauseButton: UIButton!
     
     var audioRecorder:AVAudioRecorder!
     var recordedAudio : RecordAudio!
@@ -25,6 +27,9 @@ class RecordSoundViewController: UIViewController, AVAudioRecorderDelegate {
         //Hide the stop button
         stopButton.hidden = true
         recordButton.enabled = true
+        resumeButton.hidden = true
+        pauseButton.hidden = true
+        resumeButton.enabled = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,6 +41,8 @@ class RecordSoundViewController: UIViewController, AVAudioRecorderDelegate {
         recordingInProgress.hidden = false
         stopButton.hidden = false
         recordButton.enabled = false
+        resumeButton.hidden = false
+        pauseButton.hidden = false
         //TODO: Record the user's voice
         println("in recordAudio")
         let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
@@ -63,6 +70,23 @@ class RecordSoundViewController: UIViewController, AVAudioRecorderDelegate {
         var audioSession = AVAudioSession.sharedInstance()
         audioSession.setActive(false, error: nil)
     }
+    
+    @IBAction func tapPauseBtn(sender: AnyObject) {
+        audioRecorder.pause()
+        pauseButton.setImage(UIImage(named: "pause_inactive"), forState: UIControlState.Normal)
+        resumeButton.setImage(UIImage(named: "resume_active"), forState: UIControlState.Normal)
+        pauseButton.enabled = false
+        resumeButton.enabled = true
+    }
+    
+    @IBAction func tapResumeBtn(sender: AnyObject) {
+        audioRecorder.record()
+        pauseButton.setImage(UIImage(named: "pause_active"), forState: UIControlState.Normal)
+        resumeButton.setImage(UIImage(named: "resume_inactive"), forState: UIControlState.Normal)
+        resumeButton.enabled = false
+        pauseButton.enabled = true
+    }
+    
     
     func audioRecorderDidFinishRecording(recorder: AVAudioRecorder!, successfully flag: Bool) {
         if (flag) {
