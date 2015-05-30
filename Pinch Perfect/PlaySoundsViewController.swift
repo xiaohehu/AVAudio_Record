@@ -12,6 +12,7 @@ import AVFoundation
 class PlaySoundsViewController: UIViewController {
 
     var audioPlayer : AVAudioPlayer!
+    var audioPlayer2: AVAudioPlayer!
     var receivedAudio : RecordAudio!
     var audioEngine : AVAudioEngine!
     var audioFile : AVAudioFile!
@@ -28,6 +29,7 @@ class PlaySoundsViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         audioPlayer = AVAudioPlayer(contentsOfURL: receivedAudio.filePathUrl, error: nil)
+        audioPlayer2 = AVAudioPlayer(contentsOfURL: receivedAudio.filePathUrl, error: nil)
         audioPlayer.enableRate = true
         
         audioEngine = AVAudioEngine()
@@ -77,6 +79,23 @@ class PlaySoundsViewController: UIViewController {
         audioEngine.startAndReturnError(nil)
         audioPlayerNode.play()
     }
+    
+    @IBAction func playAudioWithEcho(sender: AnyObject) {
+        audioPlayer.stop()
+        audioPlayer2.stop()
+
+        audioPlayer.currentTime = 0
+        audioPlayer.play()
+        
+        let delay : NSTimeInterval = 0.25
+        var playTime : NSTimeInterval!
+        playTime = audioPlayer2.deviceCurrentTime + delay
+        audioPlayer2.currentTime = 0
+        audioPlayer2.volume = 0.7
+        audioPlayer2.playAtTime(playTime)
+    }
+    
+    
     @IBAction func stopAudio(sender: AnyObject) {
         audioPlayer.stop()
     }
